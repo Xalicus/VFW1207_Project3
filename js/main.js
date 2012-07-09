@@ -1,8 +1,8 @@
 /*
 Author: Kevin Ward
 Class: VFW1207
-Name: Project 2
-Date: 07-05-2012
+Name: Project 3
+Date: 07-08-2012
 */
 
 // Say function only if needed.
