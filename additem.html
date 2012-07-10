@@ -74,11 +74,11 @@ Date: 07-08-2012
 					<li><label for="koolness">Koolness Factor?:<input type="range" name="quantity" min="1" max="10" value="1" id="koolness"/></label></li>
 					
 					<li><label for="comments">Comments:</label><textarea id="comments"></textarea></li>
-					<li><input type="submit" value="Submit Now" onsubmit="submitData();" /> <input type="reset" value="Reset Page" /></li>
+					<li><input type="submit" value="Submit Now" onsubmit="submit();" /> <input type="reset" value="Reset Page" /></li>
 				</ul>
 			</fieldset>
 			<nav>
-			<a href="#" id="showData" onclick="getData();">Show Data</a> : <a href="#" id="clearData" onclick="clearData(); location.reload();">Clear Data</a>
+			<a href="#" id="showData" onclick="getData();">Show Data</a> : <a href="#" id="clearData" onclick="clearDataStorage(); location.reload();">Clear Data</a>
 			</nav>
 		</form>
 		</article>
