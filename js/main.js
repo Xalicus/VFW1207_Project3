@@ -92,20 +92,20 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.petType	= ["Pet Type:", gebi("petType").value];
 			item.petName	= ["Pet Name:", gebi("petName").value];
 			item.gender		= ["Gender:", genderValue];
-			item.favepet	= ["Favorite Pet:", faveValue];
-			item.yearBought	= ["Year Bought:", gebi("yearBought").value];
+			item.favePet	= ["Favorite Pet:", faveValue];
+			item.birthDate	= ["Date of Birth:", gebi("birthDate").value];
 			item.koolness	= ["Koolness:", gebi("koolness").value];
 			item.comments	= ["Comments:", gebi("comments").value];
 		// Save data into Local Storage: Use Stringify to convert the object to a string.
 		localStorage.setItem(id, JSON.stringify(item));
-		alert("Pet is saved to the Pokedex!");
+		alert("Pet is saved to the Kool Pets List!");
 	};
 	
 	// My getData function
 	var getData = function() {
 		toggleControls("on");
 		if(localStorage.length === 0) {
-			alert("There are no Pets in the PokeDex.");
+			alert("There are no Pets in the Kool Pets List.");
 		};
 		
 		// This is supposed to write data from Local Storage back to the browser.
@@ -146,7 +146,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit Pet";
-//		editLink.addEventListener("click", editItem);
+		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 		
@@ -164,12 +164,41 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
+	
+	function editItem() {
+		// Grab data from the item local storage.
+		var value = localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		
+		// To show the form again
+		toggleControls("off");
+		
+		// populate the form fields with current localStorage values.
+		gebi("petType").value = item.petType[1];
+		gebi("petName").value = item.petName[1];
+		var radios = document.forms[0].gender;
+		for (var i=0; i<radios.length; i++) {
+			if (radios[i].value == "Male" && item.gender[1] == "Male") {
+				radios[i].setAttribute("checked", "checked");
+			} else if (radios[i].value == "Female" && item.gender[1] == "Female") {
+				radios[i].setAttribute("checked", "checked");
+			} else if (radios[i].value == "Unknown" && item.gender[1] == "Unknown") {
+				radios[i].setAttribute("checked", "checked");
+			};
+		};
+		if (item.favePet[1] == "Yes") {
+			gebi("favePet").setAttribute("checked", "checked");
+		};
+		gebi("birthDate").value = item.birthDate[1];
+		gebi("koolness").value = item.koolness[1];
+		gebi("comments").value = item.comments[1];
+	};
 
 	
 	// My Clear Data Function
 	var clearDataStorage = function() {
 		if(localStorage.length === 0) {
-			alert("No Kool Pets in the PokeDex.");
+			alert("No Kool Pets in the Kool Pets List.");
 		} else {
 			localStorage.clear();
 			alert("All Kool Pets have been set free!");

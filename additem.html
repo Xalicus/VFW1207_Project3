@@ -42,8 +42,8 @@ Date: 07-08-2012
 		<p>Choose the type of kool pet you want!.</p>
 		
 			<nav>
-			<a href="#" id="showData" onclick="getData();">Show Data</a> 
-			<a href="#" id="clearData" onclick="clearDataStorage(); location.reload();">Clear Data</a> 
+			<a href="#" id="showData">Show Data</a> 
+			<a href="#" id="clearData">Clear Data</a> 
 			<a href="additem.html" id="addNew" style="display:none;">Add New Pet</a>
 			</nav>
 		
@@ -79,9 +79,9 @@ Date: 07-08-2012
 						
 					<li><input type="checkbox" value="Yes" id="favePet" class="checkbox" /><label for="favePet">Favorite Kool Pet:</label></li>
 					
-					<li><label for="yearBought">Year Bought:<input type="date" min="2000-01-01" max="2099-12-31" value="2012-07-04" id="yearBought" /></label></li>
+					<li><label for="birthDate">Date of Birth:<input type="date" min="1900-01-01" max="2099-12-31" value="2012-07-04" id="birthDate" /></label></li>
 					
-					<li><label for="koolness">Koolness Factor?:<input type="range" name="quantity" min="1" max="10" value="1" id="koolness"/></label></li>
+					<li><label for="koolness">Koolness Factor:<input type="range" name="quantity" min="1" max="10" value="1" id="koolness"/></label></li>
 					
 					<li><label for="comments">Comments:</label><textarea id="comments"></textarea></li>
 				</ul>
