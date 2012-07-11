@@ -12,11 +12,7 @@ var say = function(message) { console.log(message); };
 
 window.addEventListener("DOMContentLoaded", function(){
 	
-	// My Variables for the functions
-/*	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
-		genderValue,
-		faveValue = "No"
-	;*/
+
 
 	// My getElementById or gebi function
 	function gebi(x){
@@ -26,9 +22,9 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	// Create select field element and populate with options.
 	var makeCats = function() {
-		var formTag = document.getElementsByTagName("petForm");
-		var selectLi = gebi("petsType");
-		var makeSelect = document.createElement("petType");
+		var formTag = document.getElementsByTagName("petForm"),
+			selectLi = gebi("petsType"),
+			makeSelect = document.createElement("petType");
 			makeSelect.setAttribute("id", "petType");
 		for(var i=0, j=petGroups.length; i<j; i++) {
 			var makeOption = document.createElement("option");
