@@ -12,7 +12,11 @@ var say = function(message) { console.log(message); };
 
 window.addEventListener("DOMContentLoaded", function(){
 	
-
+	// My Variables for the functions
+	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
+		genderValue,
+		faveValue = "No"
+	;
 
 	// My getElementById or gebi function
 	function gebi(x){
@@ -139,7 +143,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	};
 */	
 	
-	// Validating the form elements
+/*	// Validating the form elements
 	function validForm() {
 		var getEmail = document.forms[0]["email"].value;
 		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -148,12 +152,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		};
 		if (error) alert(error);
 	};
+*/
 	
-	// My Variables for the functions
+/*	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No"
-	;
+	;*/
 	
 	makeCats();
 	
