@@ -105,7 +105,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	var getData = function() {
 		toggleControls("on");
 		if(localStorage.length === 0) {
-			alert("There is no data in Local Storage.");
+			alert("There are no Pets in the PokeDex.");
 		};
 		
 		// This is supposed to write data from Local Storage back to the browser.
@@ -146,15 +146,21 @@ window.addEventListener("DOMContentLoaded", function(){
 		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit Pet";
-		editLink.addEventListener("click", editItem);
+//		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 		
+		// add my line break
+		var breakTag = document.createElement("br");
+		linksLi.appendChild(breakTag);
+		
+		
+		// add delete single item link
 		var deleteLink = document.createElement("a");
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Pet";
-		deleteLink.addEventListener("click", deleteItem);
+//		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
