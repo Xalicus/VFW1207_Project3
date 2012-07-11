@@ -12,11 +12,11 @@ var say = function(message) { console.log(message); };
 
 window.addEventListener("DOMContentLoaded", function(){
 	
-
-	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
+	// My Variables for the functions
+/*	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No"
-	;
+	;*/
 
 	// My getElementById or gebi function
 	function gebi(x){
@@ -26,17 +26,17 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	// Create select field element and populate with options.
 	var makeCats = function() {
-		var formTag = document.getElementsByTagName("form"),
-			selectLi = gebi("petsType"),
-			makeSelect = document.createElement("petsType");
-			makeSelect.setAttribute("id", "petsType");
+		var formTag = document.getElementsByTagName("petForm");
+		var selectLi = gebi("petsType");
+		var makeSelect = document.createElement("petType");
+			makeSelect.setAttribute("id", "petType");
 		for(var i=0, j=petGroups.length; i<j; i++) {
 			var makeOption = document.createElement("option");
 			var optTxt = petGroups[i];
 			makeOption.setAttribute("value", optTxt);
 			makeOption.innerHTML = optTxt;
 			makeSelect.appendChild(makeOption);
-		}
+		};
 		selectLi.appendChild(makeSelect);
 	};
 	
@@ -56,6 +56,26 @@ window.addEventListener("DOMContentLoaded", function(){
 			faveValue = gebi("favePet").value;
 		} else {
 			faveValue = "No";
+		};
+	};
+	
+	function toggleControls(n) {
+		switch(n) {
+			case "on":
+				gebi("petForm").style.display = "none";
+				gebi("clear").style.display = "inline";
+				gebi("showData").style.display = "none";
+				gebi("addNew").style.display = "inline";
+				break;
+			case "off":
+				gebi("petForm").style.display = "block";
+				gebi("clear").style.display = "inline";
+				gebi("showData").style.display = "inline";
+				gebi("addNew").style.display = "none";
+				gebi("items").style.display = "none";
+				break;
+			default:
+				return false;
 		};
 	};
 	
@@ -83,20 +103,20 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	// My getData function
 	var getData = function() {
+		toggleControls("on");
 		// This is supposed to write data from Local Storage back to the browser.
 		var makeDiv = document.createElement("div");
 		makeDiv.setAttribute("id", "items");
 		var makeList = document.createElement("ul");
 		makeDiv.appendChild(makeList);
-		
+		// This code should add the data to my page when I press show data.
 		document.body.appendChild(makeDiv);
-		
+		gebi("items").style.display = "block";
 		for (var i=0, len=localStorage.length; i<len; i++) {
 			var makeLi = document.createElement("li");
 			makeList.appendChild(makeLi);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
-			
 			// Convert strings back to being an object from localStorage value.
 			var object = JSON.parse(value);
 			var makeSubList = document.createElement("ul");
@@ -104,14 +124,14 @@ window.addEventListener("DOMContentLoaded", function(){
 			for (var n in object) {
 				var makeSubLi = document.createElement("li");
 				makeSubList.appendChild(makeSubLi);
-				var optSubText = object[n][0]+" "+object[n][1];
+				var optSubText = object[n][0] + " " + object[n][1];
 				makeSubLi.innerHTML = optSubText;
 			};
 		};
 	};
 	
 	// My Clear Data Function
-	var clearDataStorage = function() {
+/*	var clearDataStorage = function() {
 		clear; localStorage.clear();
 		return false;
 	};
@@ -121,17 +141,33 @@ window.addEventListener("DOMContentLoaded", function(){
 		// Supposed to show something here.
 		return true;
 	};
+*/	
 	
+	// Validating the form elements
+	function validForm() {
+		var getEmail = document.forms[0]["email"].value;
+		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			if (!(re.exec(getEmail))) {
+			error = "Please enter a valid email address.\n";
+		};
+		if (error) alert(error);
+	};
+	
+	// My Variables for the functions
+	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
+		genderValue,
+		faveValue = "No"
+	;
 	
 	makeCats();
 	
 	var saveData = gebi("submit");
-	saveData.addEventListener("click", submitData);
-	var showData = gebi("getData");
+	saveData.addEventListener("click", submit);
+	var showData = gebi("showData");
 	showData.addEventListener("click", getData);
-	var clearData = gebi("clearData");	
-	clearData.addEventListener("click", clearDataStorage);
-	
+/*	var clearLink = gebi("clear");	
+	clearLink.addEventListener("click", clearDataStorage);
+*/
 	
 });
 

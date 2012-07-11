@@ -40,12 +40,21 @@ Date: 07-08-2012
 		<!-- Main body of page -->
 		<article>
 		<p>Choose the type of kool pet you want!.</p>
-		<form action="#" method="post" id="form">
-			<fieldset>
+		
+			<nav>
+			<a href="#" id="showData" onclick="getData();">Show Data</a> 
+			<a href="#" id="clearData" onclick="clearDataStorage(); location.reload();">Clear Data</a> 
+			<a href="additem.html" id addNew" style="display:none;">Add New Pet</a>
+			</nav>
+		
+		<form action="#" method="post" id="petForm">
+			<fieldset id="petFieldset">
 				<legend>Choose Wisely!</legend>
-				<ul>
-					<li id="petsType"><label for="petType">Kool Pet Type:</label>
-						<select name="petType" id="petType" size="1">
+				<span>* fields are required</span>
+				<ul id="errors"</ul>
+				<ul id="questions">
+					<li id="petsType"><label for="petsType">Kool Pet Type:</label>
+<!--						<select name="petType" id="petType" size="1">
 							 <optgroup label="Pet Type:">
 								<option value="0" selected="selected"></option>
 								<option value="Dogs">Dogs</option>
@@ -54,7 +63,8 @@ Date: 07-08-2012
 								<option value="Birds">Birds</option>
 								<option value="Farm Animals">Farm Animals</option>
 							</optgroup>
-						</select></li>
+						</select>-->
+					</li>
 						
 					<li><label for="petName">Kool Pet's Name:</label>
 						<input type="text" id="petName" /></li>
@@ -74,12 +84,10 @@ Date: 07-08-2012
 					<li><label for="koolness">Koolness Factor?:<input type="range" name="quantity" min="1" max="10" value="1" id="koolness"/></label></li>
 					
 					<li><label for="comments">Comments:</label><textarea id="comments"></textarea></li>
-					<li><input type="submit" value="Submit Now" onsubmit="submit();" /> <input type="reset" value="Reset Page" /></li>
 				</ul>
 			</fieldset>
-			<nav>
-			<a href="#" id="showData" onclick="getData();">Show Data</a> : <a href="#" id="clearData" onclick="clearDataStorage(); location.reload();">Clear Data</a>
-			</nav>
+			<input type="submit" value="Submit Now" id="submit" onsubmit="submit();" /><br />
+			<input type="reset" value="Reset Page" id="reset" />
 		</form>
 		</article>
 		<!-- Footer -->
