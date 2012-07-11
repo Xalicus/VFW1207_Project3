@@ -63,13 +63,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		switch(n) {
 			case "on":
 				gebi("petForm").style.display = "none";
-				gebi("clear").style.display = "inline";
+				gebi("clearData").style.display = "inline";
 				gebi("showData").style.display = "none";
 				gebi("addNew").style.display = "inline";
 				break;
 			case "off":
 				gebi("petForm").style.display = "block";
-				gebi("clear").style.display = "inline";
+				gebi("clearData").style.display = "inline";
 				gebi("showData").style.display = "inline";
 				gebi("addNew").style.display = "none";
 				gebi("items").style.display = "none";
@@ -134,16 +134,16 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubList.appendChild(linksLi);
 			};
 			// Create the edit and delete buttons/link for each item in local storage.
-			makeItemLinks(localStorage.key(i));
+			makeItemLinks(localStorage.key(i), linksLi);
 		};
 	};
 	
-/*	// My Make Item Function
+	// My Make Item Function
 	// Create the edit and delete links for each stored item when displayed.
-	function makeItemLinks(key) {
+	function makeItemLinks(key, linksLi) {
 		// add edit single item link
 		var editLink = document.createElement("a");
-		var editLink.href = "#";
+		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit Pet";
 		editLink.addEventListener("click", editItem);
@@ -153,14 +153,17 @@ window.addEventListener("DOMContentLoaded", function(){
 		var deleteLink = document.createElement("a");
 		deleteLink.href = "#";
 		deleteLink.key = key;
-		
+		var deleteText = "Delete Pet";
+		deleteLink.addEventListener("click", deleteItem);
+		deleteLink.innerHTML = deleteText;
+		linksLi.appendChild(deleteLink);
 	};
-*/
+
 	
 	// My Clear Data Function
 	var clearDataStorage = function() {
 		if(localStorage.length === 0) {
-			alert("No Kool Pets have been added to the PokeDex.");
+			alert("No Kool Pets in the PokeDex.");
 		} else {
 			localStorage.clear();
 			alert("All Kool Pets have been set free!");
@@ -199,7 +202,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	saveData.addEventListener("click", submit);
 	var showData = gebi("showData");
 	showData.addEventListener("click", getData);
-	var clearLink = gebi("clear");	
+	var clearLink = gebi("clearData");	
 	clearLink.addEventListener("click", clearDataStorage);
 
 	
