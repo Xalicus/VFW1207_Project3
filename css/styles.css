@@ -7,6 +7,10 @@ Date: 07-08-2012
 
 #charset "utf-8";
 
+* {
+	background-color: #CCFFCC;
+}
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;

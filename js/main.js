@@ -15,7 +15,8 @@ window.addEventListener("DOMContentLoaded", function(){
 	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
-		faveValue = "No"
+		faveValue = "No",
+		errMsg = gebi("errors");
 	;
 
 	// My getElementById or gebi function
@@ -151,7 +152,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	// My Make Item Function
 	// Create the edit and delete links for each stored item when displayed.
 	function makeItemLinks(key, linksLi) {
-		// add edit single item link
+		// Add edit single item link
 		var editLink = document.createElement("a");
 		editLink.href = "#";
 		editLink.key = key;
@@ -170,7 +171,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Pet";
-//		deleteLink.addEventListener("click", deleteItem);
+		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
@@ -218,7 +219,16 @@ window.addEventListener("DOMContentLoaded", function(){
 	};
 	
 	// My Delete Item Function
-	
+	function deleteItem() {
+		var ask = confirm("Are you sure you want to delete this Kool Pet?");
+		if (ask) {
+			localStorage.removeItem(this.key);
+			alert("Kool Pet WAS deleted!!!");
+			window.location.reload();
+		} else {
+			alert("Kool Pet was NOT deleted!");
+		};
+	};
 	
 	// My Clear Data Function
 	function clearDataStorage() {
@@ -295,15 +305,6 @@ window.addEventListener("DOMContentLoaded", function(){
 		};
 	};
 	
-	
-/*	
-	// My Show Array Function
-	var showArray = function() {
-		// Supposed to show something here.
-		return true;
-	};
-*/
-	
 /*	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
@@ -320,6 +321,5 @@ window.addEventListener("DOMContentLoaded", function(){
 	var saveData = gebi("submit");
 	saveData.addEventListener("click", validate);
 
-	
 });
 
