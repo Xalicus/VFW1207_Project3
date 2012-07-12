@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	};
 	
 	// Create select field element and populate with options.
-	var makeCats = function() {
+	function makeCats() {
 		var formTag = document.getElementsByTagName("petForm"),
 			selectLi = gebi("petsType"),
 			makeSelect = document.createElement("petType");
@@ -80,8 +80,17 @@ window.addEventListener("DOMContentLoaded", function(){
 	};
 	
 	// My submit function
-	var submit = function() {
-		var id				= Math.floor(Math.random()*1000001);
+	function submit(key) {
+		// If there isn't a key, this means this is a brand new item and we need a new key.
+		if (!key) {
+			var id			= Math.floor(Math.random()*1000001);
+		} else {
+			// Set the id to the existing key I'm editing so that it will save over the data.
+			// The key is the same key that's been passed along from the editSubmit even handler
+			// to the validate function, and then passed here, into the submit function.
+			id				= key;
+		};
+		
 		// Gather round ye olde form field values, and store in ye olde objects.
 		// Object props contain array with the form label and input value.
 		
@@ -91,6 +100,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		var item			= {};
 			item.petType	= ["Pet Type:", gebi("petType").value];
 			item.petName	= ["Pet Name:", gebi("petName").value];
+			item.petEmail	= ["Pet Email:", gebi("petEmail").value];
 			item.gender		= ["Gender:", genderValue];
 			item.favePet	= ["Favorite Pet:", faveValue];
 			item.birthDate	= ["Date of Birth:", gebi("birthDate").value];
@@ -98,14 +108,14 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.comments	= ["Comments:", gebi("comments").value];
 		// Save data into Local Storage: Use Stringify to convert the object to a string.
 		localStorage.setItem(id, JSON.stringify(item));
-		alert("Pet is saved to the Kool Pets List!");
+		alert("Pet saved to the Kool Pets List!");
 	};
 	
 	// My getData function
-	var getData = function() {
+	function getData() {
 		toggleControls("on");
 		if(localStorage.length === 0) {
-			alert("There are no Pets in the Kool Pets List.");
+			alert("There\'s no Pets in the Kool Pets List.");
 		};
 		
 		// This is supposed to write data from Local Storage back to the browser.
@@ -150,12 +160,12 @@ window.addEventListener("DOMContentLoaded", function(){
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 		
-		// add my line break
+		// Add my line break
 		var breakTag = document.createElement("br");
 		linksLi.appendChild(breakTag);
 		
 		
-		// add delete single item link
+		// Add delete single item link
 		var deleteLink = document.createElement("a");
 		deleteLink.href = "#";
 		deleteLink.key = key;
@@ -165,6 +175,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		linksLi.appendChild(deleteLink);
 	};
 	
+	// My Edit Single Item Function
 	function editItem() {
 		// Grab data from the item local storage.
 		var value = localStorage.getItem(this.key);
@@ -176,6 +187,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		// populate the form fields with current localStorage values.
 		gebi("petType").value = item.petType[1];
 		gebi("petName").value = item.petName[1];
+		gebi("petEmail").value = item.petEmail[1];
 		var radios = document.forms[0].gender;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.gender[1] == "Male") {
@@ -192,11 +204,24 @@ window.addEventListener("DOMContentLoaded", function(){
 		gebi("birthDate").value = item.birthDate[1];
 		gebi("koolness").value = item.koolness[1];
 		gebi("comments").value = item.comments[1];
+		
+		// Remove the initial listener from the input "save pet" button.
+		save.removeEventListener("click", submit);
+		// Change Submit button Value to Edit Button
+		gebi("submit").value = "Edit Pet";
+		var editSubmit = gebi("submit");
+		
+		// Save the key value established in this function as a prop of the editSubmit event
+		// so we can use that value when we save the data we edited.
+		editSubmit.addEvenListener("click", validate);
+		editSubmit.key = this.key;
 	};
-
+	
+	// My Delete Item Function
+	
 	
 	// My Clear Data Function
-	var clearDataStorage = function() {
+	function clearDataStorage() {
 		if(localStorage.length === 0) {
 			alert("No Kool Pets in the Kool Pets List.");
 		} else {
@@ -206,39 +231,94 @@ window.addEventListener("DOMContentLoaded", function(){
 			return false;
 		};
 	};
+	
+	// My Validate Function
+	function validate(e) {
+		// Define the elements we want to check
+		var getPetType = gebi("PetType");
+		var getPetName = gebi("petName");
+		var getPetEmail = gebi("petEmail");
+		var getGender = gebi("gender");
+		
+		// Resetting Error Messages
+		errMsg.innerHTML = "";
+		getPetType.style.border = "2px solid black";
+		getPetName.style.border = "2px solid black";
+		getPetEmail.style.border = "2px solid black";
+		getGender.style.border = "2px solid black";
+		
+		// Get Error Messages
+		var messageArray = [];
+		
+		// Pet Type Validation
+		if (getPetType.value === "--Choose A Pet Type--") {
+			var petTypeError = "Please choose a pet type.";
+			getPetType.style.border = "2px solid red";
+			messageArray.push(petTypeError);
+		};
+		
+		// Pet Name Validation
+		if (getPetName === "") {
+			var petNameError = "Please enter a Kool Pet Name!";
+			getPetName.style.border = "2px solid red";
+			messageArray.push(petNameError);
+		};
+		
+		// Email Validation
+		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if (!(re.exec(getPetEmail.value))) {
+			var petEmailError = "Please enter a valid email address for your pet.";
+			getPetEmail.style.border = "2px solid red";
+			messageArray.push(petEmailError);
+		};
+		
+		// Pet Gender Validation
+		if (getGender === "Unknown") {
+			var genderError = "Please pick a Pet Gender";
+			getGender.style.border = "2px solid red";
+			messageArray.push(genderError);
+		};
+		
+		// If there were errors, display them on the screen.
+		if (messageArray.length >= 1) {
+			for (var i=0, j=messageArray.length; i < j; i++) {
+				var txt = document.createElement("li");
+				txt.innerHTML = messageArray[i];
+				errMsg.appendChild(txt);
+			};
+			e.preventDefault();
+			return false;
+		} else {
+			// If all is OK, save the data! Send the key value (which came from the editData function).
+			// Remember this key value was passed through the editSubmit event listener as a prop.
+			submit(this.key);
+		};
+	};
+	
+	
 /*	
 	// My Show Array Function
 	var showArray = function() {
 		// Supposed to show something here.
 		return true;
 	};
-*/	
-	
-/*	// Validating the form elements
-	function validForm() {
-		var getEmail = document.forms[0]["email"].value;
-		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			if (!(re.exec(getEmail))) {
-			error = "Please enter a valid email address.\n";
-		};
-		if (error) alert(error);
-	};
 */
 	
 /*	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
-		faveValue = "No"
+		faveValue = "No",
+		errMsg = gebi("errors"); 
 	;*/
 	
 	makeCats();
 	
-	var saveData = gebi("submit");
-	saveData.addEventListener("click", submit);
 	var showData = gebi("showData");
 	showData.addEventListener("click", getData);
 	var clearLink = gebi("clearData");	
 	clearLink.addEventListener("click", clearDataStorage);
+	var saveData = gebi("submit");
+	saveData.addEventListener("click", validate);
 
 	
 });
