@@ -12,12 +12,12 @@ var say = function(message) { console.log(message); };
 
 window.addEventListener("DOMContentLoaded", function(){
 	
-	// My Variables for the functions
+/*	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No",
 		errMsg = gebi("errors");
-	;
+	;*/
 
 	// My getElementById or gebi function
 	function gebi(x){
@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			selectLi = gebi("petsType"),
 			makeSelect = document.createElement("petType");
 			makeSelect.setAttribute("id", "petType");
-		for(var i=0, j=petGroups.length; i<j; i++) {
+		for (var i=0, j=petGroups.length; i<j; i++) {
 			var makeOption = document.createElement("option");
 			var optTxt = petGroups[i];
 			makeOption.setAttribute("value", optTxt);
@@ -252,10 +252,10 @@ window.addEventListener("DOMContentLoaded", function(){
 		
 		// Resetting Error Messages
 		errMsg.innerHTML = "";
-		getPetType.style.border = "2px solid black";
-		getPetName.style.border = "2px solid black";
-		getPetEmail.style.border = "2px solid black";
-		getGender.style.border = "2px solid black";
+		getPetType.style.border = "1px solid black";
+		getPetName.style.border = "1px solid black";
+		getPetEmail.style.border = "1px solid black";
+		getGender.style.border = "1px solid black";
 		
 		// Get Error Messages
 		var messageArray = [];
@@ -305,12 +305,12 @@ window.addEventListener("DOMContentLoaded", function(){
 		};
 	};
 	
-/*	// My Variables for the functions
+	// My Variables for the functions
 	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No",
-		errMsg = gebi("errors"); 
-	;*/
+		errMsg = gebi("errors")
+	;
 	
 	makeCats();
 	
