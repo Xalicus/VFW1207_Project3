@@ -13,7 +13,7 @@ var say = function(message) { console.log(message); };
 window.addEventListener("DOMContentLoaded", function(){
 	
 /*	// My Variables for the functions
-	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
+	var petGroup = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No",
 		errMsg = gebi("errors");
@@ -31,9 +31,9 @@ window.addEventListener("DOMContentLoaded", function(){
 			selectLi = gebi("petsType"),
 			makeSelect = document.createElement("petType");
 			makeSelect.setAttribute("id", "petType");
-		for (var i=0, j=petGroups.length; i<j; i++) {
+		for (var i=0, j=petGroup.length; i<j; i++) {
 			var makeOption = document.createElement("option");
-			var optTxt = petGroups[i];
+			var optTxt = petGroup[i];
 			makeOption.setAttribute("value", optTxt);
 			makeOption.innerHTML = optTxt;
 			makeSelect.appendChild(makeOption);
@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		getCheckboxValue();
 		
 		var item			= {};
-			item.petType	= ["Pet Type:", gebi("petType").value];
+			item.petsType	= ["Pet Type:", gebi("petsType").value];
 			item.petName	= ["Pet Name:", gebi("petName").value];
 			item.petEmail	= ["Pet Email:", gebi("petEmail").value];
 			item.gender		= ["Gender:", genderValue];
@@ -306,10 +306,10 @@ window.addEventListener("DOMContentLoaded", function(){
 	};
 	
 	// My Variables for the functions
-	var petGroups = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
+	var petGroup = ["--Choose A Pet Type--", "Dogs", "Cats", "Rodents", "Birds", "Farm Animals"],
 		genderValue,
 		faveValue = "No",
-		errMsg = gebi("errors")
+		errMsg = gebi("errors");
 	;
 	
 	makeCats();
